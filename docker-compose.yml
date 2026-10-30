@@ -1,0 +1,10 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lyrics-api
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+      - "3000:3000"
