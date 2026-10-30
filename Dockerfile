@@ -5,18 +5,18 @@ WORKDIR /app
 COPY api/v2/ .
 
 RUN chmod +x ./mvnw
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw -B -ntp clean package -DskipTests
 
 
-FROM node:20-alpine AS frontend-build
+FROM node:22-alpine AS frontend-build
 
 WORKDIR /app
 
 RUN apk add --no-cache git
 
-COPY public/package.json public/package-lock.json ./
+COPY public/package.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY public/ .
 COPY .git/ .git/
@@ -33,8 +33,9 @@ RUN apt-get update \
         curl \
         ca-certificates \
         xz-utils \
-    && NODE_VERSION=20.19.4 \
-    && curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-arm64.tar.xz" \
+    && NODE_VERSION=22.22.2 \
+    && ARCH=$(dpkg --print-architecture | sed 's/amd64/x64/') \
+    && curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" \
         -o /tmp/node.tar.xz \
     && tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1 \
     && rm -f /tmp/node.tar.xz \
