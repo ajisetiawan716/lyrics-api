@@ -3,6 +3,9 @@
   "version": "1.1.5",
   "description": "A simple lyrics API that can fetch lyrics from Musixmatch and Genius API.",
   "main": "index.ts",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "start": "ts-node index.ts",
     "format": "prettier --write .",
@@ -18,7 +21,6 @@
     "colors": "^1.4.0",
     "cookie-parser": "^1.4.7",
     "express": "^4.19.2",
-    "path": "^0.12.7",
     "useragent": "^2.3.0",
     "ytmusic-api": "^5.3.0"
   },
@@ -29,7 +31,9 @@
   "bugs": {
     "url": "https://github.com/shittybot/llyrics-api/issues"
   },
-  "homepage": "https://github.com/shittybot/llyrics-api#readme",
+  "homepage": {
+    "url": "https://github.com/shittybot/llyrics-api#readme"
+  },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^4.17.21",
